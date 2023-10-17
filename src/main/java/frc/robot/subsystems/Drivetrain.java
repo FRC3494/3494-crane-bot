@@ -6,20 +6,18 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 public class Drivetrain extends SubsystemBase {
-    private final TalonFX leftLeader = new TalonFX(Constants.Drivetrain.LeftLeaderID);
-    private final TalonFX leftFollower = new TalonFX(Constants.Drivetrain.LeftFollowerID);
-    private final TalonFX rightLeader = new TalonFX(Constants.Drivetrain.RightLeaderID);
-    private final TalonFX rightFollower = new TalonFX(Constants.Drivetrain.RightFollowerID);
+  private final TalonSRX leftLeader = new TalonSRX(Constants.Drivetrain.LeftLeaderID);
+  private final TalonSRX leftFollower = new TalonSRX(Constants.Drivetrain.LeftFollowerID);
+  private final TalonSRX rightLeader = new TalonSRX(Constants.Drivetrain.RightLeaderID);
+  private final TalonSRX rightFollower = new TalonSRX(Constants.Drivetrain.RightFollowerID);
 
   /** Creates a new ExampleSubsystem. */
   public Drivetrain() {
-    // leftFollower.setControl(new Follower(leftLeader.getDeviceID(), false));
-    // rightFollower.setControl(new Follower(rightLeader.getDeviceID(), false));
+    
   }
 
   @Override
@@ -30,15 +28,15 @@ public class Drivetrain extends SubsystemBase {
    * Drive the robot drivetrain
    * 
    * @param forwardSpeed how fast the robot accelerates forward
-   * @param turnSpeed how fast the robot rotates it's heading
+   * @param turnSpeed    how fast the robot rotates it's heading
    */
-  public void drive(double forwardSpeed, double turnSpeed)
-  {
-    System.out.println(forwardSpeed);
-    leftFollower.set(TalonFXControlMode.Velocity, turnSpeed+forwardSpeed);
-    leftLeader.set(TalonFXControlMode.Velocity, turnSpeed+forwardSpeed);
-    rightLeader.set(TalonFXControlMode.Velocity, turnSpeed-forwardSpeed);
-    rightFollower.set(TalonFXControlMode.Velocity, turnSpeed-forwardSpeed);
+  public void drive(double forwardSpeed, double turnSpeed) {
+    System.out.println("Forward speed: " + forwardSpeed);
+    System.out.println("Turn Speed: (positive -> right)" + turnSpeed);
+    leftFollower.set(TalonSRXControlMode.PercentOutput, forwardSpeed - turnSpeed);
+    leftLeader.set(TalonSRXControlMode.PercentOutput, forwardSpeed - turnSpeed);
+    rightLeader.set(TalonSRXControlMode.PercentOutput, forwardSpeed + turnSpeed);
+    rightFollower.set(TalonSRXControlMode.PercentOutput, forwardSpeed + turnSpeed);
   }
 
   @Override
