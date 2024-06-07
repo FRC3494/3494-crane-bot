@@ -17,7 +17,7 @@ public class Drivetrain extends SubsystemBase {
 
   /** Creates a new ExampleSubsystem. */
   public Drivetrain() {
-    
+
   }
 
   @Override
@@ -35,8 +35,8 @@ public class Drivetrain extends SubsystemBase {
     System.out.println("Turn Speed: (positive -> right)" + turnSpeed);
     leftFollower.set(TalonSRXControlMode.PercentOutput, forwardSpeed - turnSpeed);
     leftLeader.set(TalonSRXControlMode.PercentOutput, forwardSpeed - turnSpeed);
-    rightLeader.set(TalonSRXControlMode.PercentOutput, forwardSpeed + turnSpeed);
-    rightFollower.set(TalonSRXControlMode.PercentOutput, forwardSpeed + turnSpeed);
+    rightLeader.set(TalonSRXControlMode.PercentOutput, -(forwardSpeed + turnSpeed));
+    rightFollower.set(TalonSRXControlMode.PercentOutput, -(forwardSpeed + turnSpeed));
   }
 
   @Override

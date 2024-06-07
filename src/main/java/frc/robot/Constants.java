@@ -18,10 +18,10 @@ package frc.robot;
  */
 public final class Constants {
     public static class Drivetrain {
-        public static int RightLeaderID = 7;
-        public static int RightFollowerID = 3;
+        public static int RightLeaderID = 14;
+        public static int RightFollowerID = 15;
 
-        public static int LeftLeaderID = 4;
-        public static int LeftFollowerID = 2;
+        public static int LeftLeaderID = 0;
+        public static int LeftFollowerID = 1;
     }
 }
